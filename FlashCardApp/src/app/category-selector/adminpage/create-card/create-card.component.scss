@@ -1,0 +1,40 @@
+.main-login {
+    width: 70%;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 28px;
+    border-radius: 15px;
+    border: 2px #e26585 solid;
+}
+.login-title {
+    font-size: 2em;
+    font-weight: 500;
+
+}
+.login-form {
+    margin-top: 10%;
+}
+.input-full-width {
+    width: 80%;
+}
+
+.redirect-to-register {
+    margin-top: 5%;
+}
+.register-link  {
+    color: blue;
+    cursor: pointer;
+}
+.green {
+    color: green;
+}
+
+@media (max-width: 900px) {
+    .main-login {
+        width: 80%;
+    }
+}
+

@@ -1,0 +1,53 @@
+.main-admin-div {
+    text-align: center;
+}
+
+.admin-content-div {
+    width: 95%;
+    border: 2px solid #e26585 ;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    padding: 20px;
+}
+.crud-operation-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.toggle-create-div {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    padding: 10px 30px;
+    border: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    margin-bottom: 10px;
+}
+
+.toggle-create-div:hover {
+    background-color: rgb(157, 207, 157);
+}
+
+.button-edit {
+    padding: 12px 20px;
+    border: none;
+    background-color: rgb(255, 119, 0);
+    border-radius: 20px;
+    color: white;
+    transition: background-color 0.15s;
+    transition: color 0.15;
+    cursor: pointer;
+}
+
+.button-edit:hover {
+    background-color: rgb(255, 184, 126);
+    color: black
+}
+.button-edit:active {
+    opacity: 0.5;
+}

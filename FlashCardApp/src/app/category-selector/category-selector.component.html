@@ -1,0 +1,44 @@
+<div class="homepage-main-div">
+    <h1>Kategória választó</h1>
+    <h3>Mit szeretnél ma tanulni?</h3>
+   
+    <div class="homepage-selector-grid">
+   
+       <a>
+           <div 
+        class="homepage-menu-item">
+           <span class="menu-item-title">Ruhák</span>
+           <br>
+           <img class="icon" src="/noun-clothes-7379031.svg">
+           <br>
+           <button mat-raised-button (click)="redirectTo('categories/learning/ruhazat')">Tanulás</button>
+           <button mat-flat-button (click)="redirectTo('categories/test/ruhazat')">Teszt!</button>
+       </div>
+       </a>
+   
+      <a>
+        <div
+        class="homepage-menu-item ">
+            <span class="menu-item-title">Ételek</span>
+           <br>
+           <img class="icon" src="/noun-food-2325619.svg">
+           <br>
+           <button mat-raised-button  (click)="redirectTo('categories/learning/etel')">Tanulás</button>
+           <button mat-flat-button  (click)="redirectTo('categories/test/etel')" >Teszt!</button>
+        </div>
+      </a>
+   
+       <div
+       class="homepage-menu-item">
+           <span class="menu-item-title">Háztartás</span>
+           <br>
+           <img class="icon" src="/noun-appliance-7316399.svg">
+           <br>
+           <button mat-raised-button (click)="redirectTo('categories/learning/haztartas')">Tanulás</button>
+           <button mat-flat-button (click)="redirectTo('categories/test/haztartas')">Teszt!</button>
+       </div>
+   
+    </div>
+    <button mat-flat-button (click)="redirectTo('homepage')">Főoldal</button>
+    
+   </div>

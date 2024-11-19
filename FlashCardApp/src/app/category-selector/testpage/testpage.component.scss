@@ -1,0 +1,175 @@
+.main-testpage-div  {
+    text-align: center;
+    padding: 30px;
+}
+
+.card-holder {
+    perspective: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 30px;
+}
+
+.card {
+    width: 150px;
+    height: 200px;
+    border: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    border-radius: 20px;
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+.card-container {
+    position: relative;
+    transition: animation 0.3s;
+}
+
+.card-container.is-dragging {
+    position: absolute;
+    cursor: move;
+    z-index: 1000;
+  }
+  
+  .card {
+    transition: transform 0.3s;
+  }
+  
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+.card-front{
+    background-color: #e26585;
+    color: white;
+    transition: transform 0.15s;
+}
+.card-back {
+    background-color: #d4a3af;
+    color: black;
+}
+.card-back:hover {
+    /* Prevent spinning effect when hovered on the back of the card */
+    transform: rotateY(180deg) scale(1.05);
+}
+
+
+.card:not(.is-flipped) .card-front:hover {
+    transform: scale(1.05);
+    
+}
+
+.card-back  {
+  transform: rotateY(180deg);
+  
+}
+
+.game-holder-div {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.is-dragging {
+    cursor: move;
+}
+
+.card-container.hidden {
+    visibility: hidden;
+    pointer-events: none;
+    animation: fadeOutAndScale; 
+  }
+
+/*Dropzone styles*/
+
+.drop-zone {
+    align-self: center;
+    width: 200px;
+    height: 300px;
+    border: 2px dashed #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .drop-zone.over {
+    background-color: #e0f7fa; /* Change color when card hovers over */
+  }
+  .correct {
+    background-color: rgb(213, 250, 213);
+  }
+
+  .incorrect {
+    background-color: rgb(255, 182, 182);
+  }
+
+  .back-button-holder {
+    margin-top: 30px;
+  }
+
+  @keyframes fadeOutAndScale {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  @media (min-width: 1300px) and (max-width:1600px) {
+    .card-holder {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+  @media (min-width: 1100px) and (max-width:1299px) {
+    .card-holder {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .drop-zone {
+      width: 100px;
+      height: 500px;
+    }
+  }
+  @media (min-width: 500px) and (max-width: 1099px) {
+    .card-holder {
+      grid-template-columns: 1fr 1fr;
+    }
+    .drop-zone {
+      width: 100px;
+      height: 500px;
+    }
+  }
+  @media (max-width: 499px) {
+    .card-holder {
+      grid-template-columns: 1fr;
+    }
+    .drop-zone {
+      width: 100px;
+      height: 2000px;
+    }
+  }
+
+  
+    
+  

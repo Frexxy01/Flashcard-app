@@ -1,0 +1,45 @@
+.homepage-main-div {
+    text-align: center;
+}
+
+.homepage-selector-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 30px;
+    margin-bottom: 20px;
+}
+
+.homepage-menu-item {
+    width: 250px;
+    height: 250px;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+    border: 2px solid #e26585;
+    background-color: #fd7597;
+    border-radius: 20px;
+}
+.homepage-menu-item img {
+    height: 180px;
+}
+
+.menu-item-title {
+    font-size: 30px;
+    
+}
+.homepage-menu-item:hover {
+    transform: scale(1.02);
+}
+.disabled {
+    cursor :not-allowed;
+    opacity: 0.2;
+}
+
+@media (max-width: 1300px) {
+   .homepage-selector-grid {
+    grid-template-columns: 1fr;
+   } 
+}

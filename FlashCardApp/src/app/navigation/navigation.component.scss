@@ -1,0 +1,37 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+  color: white;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.primary-bg {
+  background-color: var(--primary-color, #e26585); // Or use Angular Material's SCSS variable if available
+  color: white; 
+}
+
+.primary-bg a {
+  color: white; 
+}
+
+.primary-bg mat-nav-list a {
+  color: white; 
+}
+
+a {
+  color: inherit; 
+}
+.sidenav .mat-nav-list a {
+}

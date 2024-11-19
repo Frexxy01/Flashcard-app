@@ -1,0 +1,36 @@
+<div class="main-login">
+    
+    <span class="login-title">Új kártya</span>
+ 
+    <form class="login-form" [formGroup]="createCardForm">
+     <mat-form-field class="input-full-width">
+         <mat-label>Magyar</mat-label>
+         <input 
+         type="text" 
+         matInput 
+         formControlName ="magyar" 
+         placeholder="Kiscica">
+       </mat-form-field>
+       <br> 
+       <mat-form-field class="input-full-width">
+        <mat-label>Német</mat-label>
+        <input 
+        type="text" 
+        matInput 
+        formControlName ="nemet" 
+        placeholder="panzerkampfwagen">
+      </mat-form-field>
+      <br> 
+      <mat-form-field class="input-full-width">
+        <mat-label>Kategória</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories; trackBy: trackByCategory" [value]="category.value">
+            {{ category.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br> 
+       <br>
+       <button mat-raised-button (click)="securityCheckPOST()">Mehet!</button>
+ </form>
+ </div>

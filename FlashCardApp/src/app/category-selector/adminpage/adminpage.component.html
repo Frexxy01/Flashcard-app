@@ -1,0 +1,57 @@
+<div class="main-admin-div">
+    <h1>Üdvözöllek az adminisztrátori felületen!</h1>
+    <div>
+      <button class="toggle-create-div"
+      (click)="toggleAdd()"
+      >{{hide() ? 'Elrejt' : 'Új Kártya hozzáadása'}}</button>
+      <button mat-flat-button (click)="redirectTo('homepage')">Főoldal</button>
+    </div>
+    
+    <div class="crud-operation-holder">
+      <app-create-card *ngIf="hide()" (cardsUpdated)="handleCardsUpdated()"></app-create-card>
+      <app-edit-card id="update" [card]="selectedCard" (toggleEditCard)="toggleEditOff()" (cardsUpdated)="handleCardsUpdated()" *ngIf="hideEdit()"></app-edit-card>
+    </div>
+    <div class="admin-content-div">
+        <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> id </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Magyar </th>
+              <td mat-cell *matCellDef="let element"> {{element.magyar}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Német </th>
+              <td mat-cell *matCellDef="let element"> {{element.nemet}} </td>
+            </ng-container>
+          
+      
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef> Kategória </th>
+              <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="operation">
+                <th mat-header-cell *matHeaderCellDef> Törlés </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <button mat-flat-button (click)="deleteOneCardComponent(element.id)">Törlés</button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Szerkesztés </th>
+              <td mat-cell *matCellDef="let element"> 
+                  <button (click)="toggleEdit(element)" class="button-edit">Szerkeszt</button>
+              </td>
+          </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>   
+</div>

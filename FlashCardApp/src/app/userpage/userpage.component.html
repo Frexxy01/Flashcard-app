@@ -1,0 +1,53 @@
+<div class="homepage-main-div">
+ <h1>Főmenü</h1>
+ <h3>Készen állsz a tanulásra?</h3>
+
+ <div class="homepage-selector-grid">
+
+    <a (click)="backToLogin()" >
+        <div class="example-ripple-container mat-elevation-z4"
+    matRipple
+    [matRippleCentered]="centered"
+    [matRippleDisabled]="disabled"
+    [matRippleUnbounded]="unbounded"
+    [matRippleRadius]="radius"
+    [matRippleColor]="color"
+     class="homepage-menu-item blue">
+        <span class="menu-item-title">Kijelentkezés</span>
+        <img class="icon" src="/noun-logout-7198981.svg">
+    </div>
+    </a>
+
+    <a (click)="redirectToCategory()">
+        <div
+    class="example-ripple-container mat-elevation-z4"
+    matRipple
+    [matRippleCentered]="centered"
+    [matRippleDisabled]="disabled"
+    [matRippleUnbounded]="unbounded"
+    [matRippleRadius]="radius"
+    [matRippleColor]="color"
+    class="homepage-menu-item red">
+        <span class="menu-item-title">Kategóriaválsztó</span>
+        <img class="icon" src="/noun-categories-7287977.svg">
+    </div>
+    </a>
+
+    <a (click)="redirectToAdminpage()">
+        <div
+    class="example-ripple-container mat-elevation-z4"
+    matRipple
+    [matRippleCentered]="centered"
+    [matRippleDisabled]="disabled"
+    [matRippleUnbounded]="unbounded"
+    [matRippleRadius]="radius"
+    [matRippleColor]="color"
+    class="homepage-menu-item blue">
+        <span class="menu-item-title">Admin Panel</span>
+        <img class="icon" src="/noun-admin-6289407.svg">
+    </div>
+    </a>
+
+ </div>
+
+</div>

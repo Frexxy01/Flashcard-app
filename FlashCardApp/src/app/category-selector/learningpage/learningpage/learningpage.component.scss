@@ -1,0 +1,57 @@
+.main-learning-div {
+    text-align: center;
+}
+.two-side-card-holder {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 60%;
+    
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+}
+.side-hungarian, .side-german {
+    border: 1px solid black;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background-color: #ffccd9;
+    box-shadow: 5px 5px 5px #989898;
+}
+
+.value {
+    font-size: 24px;
+    padding-top: 30px;
+}
+.lang-title {
+    font-size: 24px;
+    padding: 10px;
+    background-color: #e26585;
+    color: white;
+    border-radius: 10px;
+}
+
+.card-and-button-holder {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.counter {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 24px;
+    display: inline;
+    text-align: center;
+    justify-content: center;
+}
+
+
+@media (max-width: 780px) {
+    .two-side-card-holder {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+        padding: 20px;
+    }
+}

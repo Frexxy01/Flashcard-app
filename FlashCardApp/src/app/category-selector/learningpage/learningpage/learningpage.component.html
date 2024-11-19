@@ -1,0 +1,44 @@
+<div class="main-learning-div">
+    <h1>Tanuló oldal</h1>
+    <h3>Kategória: {{currectTitle}}</h3>
+
+    <div class="card-and-button-holder">
+        <div class="two-side-card-holder"
+         *ngIf="learningCards.length > 0"
+         [@cardChangeAnimation]="animationState"
+         (@cardChangeAnimation.done)="resetAnimationState()"
+         >
+
+            <div class="side-hungarian">
+                <div class="lang-title">Magyar:</div>
+                <div class="value">
+                    <div>
+                        {{learningCards[((currentCardIndex % learningCards.length) + learningCards.length) % learningCards.length ].magyar }}
+                    </div>
+                </div>
+            </div>
+    
+            <div class="side-german"
+            *ngIf="learningCards.length > 0"
+            [@cardChangeAnimation]
+            >
+                <div class="lang-title">Német:</div>
+                <div class="value">
+                    {{ learningCards[((currentCardIndex % learningCards.length) + learningCards.length) % learningCards.length ].nemet }}
+                </div>
+            </div>
+    
+        </div>
+    
+        <div>
+            <button mat-flat-button (click)="redirectTo('categories')">Kategória Választó</button>
+            <button mat-stroked-button  (click)="goBackward()">Előző</button>
+
+            <div class="counter">
+                {{ ((currentCardIndex % learningCards.length) + learningCards.length) % learningCards.length + 1 }}/{{ learningCards.length }}
+            </div>
+            <button mat-stroked-button  (click)="goForward()">Következő</button>
+            <button mat-flat-button (click)="redirectTo('homepage')">Főoldal</button>
+          </div>
+    </div>
+</div>
