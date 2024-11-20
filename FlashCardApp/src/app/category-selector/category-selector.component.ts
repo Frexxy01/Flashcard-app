@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { learningCard } from './adminpage/admin';
 import { StudcardApiService } from './services/studcard-api.service';
+import { RedirectService } from '../utils/redirect.service';
 
 @Component({
   selector: 'app-category-selector',
@@ -21,12 +22,10 @@ export class CategorySelectorComponent {
   radius: number = 150;
   color: string = 'ligthgray';
 
-  constructor(private router: Router){
-
-  }
+  constructor(private router: Router, private redirectService: RedirectService) {}
 
   redirectTo(url: string) {
-    this.router.navigate([url])
+    this.redirectService.redirectTo(url)
   }
 
 }

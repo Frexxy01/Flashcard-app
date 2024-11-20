@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { RedirectService } from '../utils/redirect.service';
 
 
 @Component({
@@ -16,38 +17,42 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  registerForm !: FormGroup
+  hide = signal(true);
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService : AuthService
-  ) {
-  }
-  signInForm !: FormGroup
-
-  redirectTo(url: string) {
-    this.router.navigate(['login'])
-  }
-
+    private authService : AuthService,
+    private redirectService: RedirectService
+  ) {}
+  
+ 
   ngOnInit(): void {
-    this.signInForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     })
   }
-  hide = signal(true);
+  
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  registerUser() {
-    const email = this.signInForm.get('email')?.value
-    const password = this.signInForm.get('password')?.value
+
+  redirectTo(url: string) {
+    this.redirectService.redirectTo(url)
+  }
+
+  async registerUser() {
+    const email = this.registerForm.get('email')?.value
+    const password = this.registerForm.get('password')?.value
     if (email == ''  ||  password == '') {
       alert('Mindem mező megadása kötelező')
     }
-    const credentials = this.authService.signUpwithEmail(email,password)
-    console.log(credentials)
-    //console.log(this.authService)
+    await this.authService.signUpwithEmail(email,password)
+    this.registerForm.reset()
+    this.redirectService.redirectTo('homepage')
   }
-
 }

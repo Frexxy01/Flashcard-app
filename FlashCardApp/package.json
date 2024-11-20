@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start:frontend": "ng serve -o",
-    "start:backend": "cd ../FlashCardApi-main && npm run start",
+    "start:backend": "cd ../FlashCardApi && npm run start",
     "start": "concurrently \" npm run start:frontend\" \"npm run start:backend\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

@@ -1,22 +1,23 @@
 <div class="main-testpage-div" #cardHolder>
-    <br>
+    
     <h1>Teszt oldal!</h1>
-<p>Egyetlen kattintással megfordíthatod a kártyát. A húzás funkciót pedig szintén kattintással tudod ki- és bekapcsolni.</p>
+    <p>Egyetlen kattintással megfordíthatod a kártyát. A húzás funkciót pedig szintén kattintással tudod ki- és bekapcsolni.</p>
 
     <div class="game-holder-div">
-      <div class="drop-zone correct js-drop-zone-correct"
-      >
+
+      <div class="drop-zone correct js-drop-zone-correct">
         Sikerült!
         <div>
           {{dropZoneCorrect.length}}
         </div>
       </div>
+
       <div class="card-holder">
+
         <div class="card-container" 
         *ngFor="let card of testCards; let i = index" 
         [attr.data-id]="card.id"
-        [class.hidden]="card.dropped"
-        >
+        [class.hidden]="card.dropped">
           <div class="card" [class.is-flipped]="card.flipped" (click)="flipCard(card, $event)">
             <div class="card-front">
               <p>{{ card.magyar }}</p>
@@ -28,15 +29,18 @@
             </div>
           </div>
         </div>
+
       </div>
-      <div class="drop-zone incorrect js-drop-zone-incorrect"
-      >
+
+      <div class="drop-zone incorrect js-drop-zone-incorrect">
         Nem sikerült!
         <div>
           {{dropZoneIncorrect.length}}
         </div>
       </div>
+
     </div>
+    
     <div class="back-button-holder">
       <button mat-flat-button (click)="redirectTo('categories')">Kilépés</button>
     </div>

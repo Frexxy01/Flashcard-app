@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { learningCard } from '../../adminpage/admin';
+import { learningCard } from '../adminpage/admin';
 import { Observable, Subscription } from 'rxjs';
-
-import { StudcardApiService } from '../../services/studcard-api.service';
+import { StudcardApiService } from '../services/studcard-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
@@ -33,33 +31,26 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 export class LearningpageComponent implements OnInit {
 
   currectTitle: string = '';
-  currentCardIndex: number = 0; // Track the index of the current card
-  $getAllCards: Observable<learningCard[]>;
+  currentCardIndex: number = 0; 
   learningCards: learningCard[] = []
-  subscription !: Subscription
-  
-
-  constructor(private cardSevice: StudcardApiService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.$getAllCards = this.cardSevice.$getCards.pipe(
-      //map((cards)=> this.tableData)
-    )
-
-  }
-  // Rendering the title
+  subscription !: Subscription 
   categories = [
-    {
-      value: 'ruhazat', viewValue: 'Ruházat'
-    },
-    {
-      value: 'etel', viewValue: 'Étel'
-    },
-    {
-      value: 'haztartas', viewValue: 'Háztartás'
-    }
+    {value: 'ruhazat', viewValue: 'Ruházat'},
+    {value: 'etel', viewValue: 'Étel'},
+    {value: 'haztartas', viewValue: 'Háztartás'}
   ]
+  animationState: 'forward' | 'backward' | null = null;
+
+  private $getAllCards: Observable<learningCard[]>;
+
+  constructor(
+    private cardSevice: StudcardApiService,
+    private router: Router, 
+    private activatedRoute: ActivatedRoute) {
+    this.$getAllCards = this.cardSevice.$getCards
+  }
 
   ngOnInit(): void {
-
     this.subscription = this.$getAllCards.subscribe((cards: learningCard[]) => {
       const category = this.activatedRoute.snapshot.paramMap.get('category')
       this.learningCards = cards.filter((card) => {
@@ -77,6 +68,10 @@ export class LearningpageComponent implements OnInit {
      })
   }
 
+  redirectTo(url: string) {
+    this.router.navigate([url])
+  }
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -92,15 +87,7 @@ export class LearningpageComponent implements OnInit {
     this.currentCardIndex--;
   }
 
-  //Animation for card changes
-
-  animationState: 'forward' | 'backward' | null = null;
-
   resetAnimationState() {
     this.animationState = null;
-  }
-  
-  redirectTo(url: string) {
-    this.router.navigate([url])
   }
 }

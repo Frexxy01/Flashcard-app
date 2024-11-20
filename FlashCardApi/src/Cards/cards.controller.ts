@@ -1,35 +1,35 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
-import { RoomsService } from './rooms.service';
-import { CreateRoomDto, CreateStudyCardDto } from './dto/create-room.dto';
+import { CardsService } from './cards.service';
+import { CreateStudyCardDto } from './dto/create-card.dto';
 
 import { studyCard } from 'src/cards';
 
 @Controller('/cards')
-export class RoomsController {
-  constructor(private readonly roomsService: RoomsService) {}
+export class CardController {
+  constructor(private readonly cardService: CardsService) {}
 
   @Post()
   create(@Body() CreateStudyCardDto: CreateStudyCardDto) {
-    return this.roomsService.create(CreateStudyCardDto);
+    return this.cardService.create(CreateStudyCardDto);
   }
 
   @Get()
   findAll() {
-    return this.roomsService.findAll();
+    return this.cardService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.roomsService.findOne(id);
+    return this.cardService.findOne(id);
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() argumentCard: studyCard) {
-    return this.roomsService.update(argumentCard);
+    return this.cardService.update(argumentCard);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.roomsService.remove(id);
+    return this.cardService.remove(id);
   }
 }

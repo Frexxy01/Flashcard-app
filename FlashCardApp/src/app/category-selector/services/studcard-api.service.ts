@@ -15,10 +15,7 @@ export class StudcardApiService {
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config: Appconfig,
   private http: HttpClient) { 
-
     this.$getCards = this.http.get<learningCard[]>(this.config.apiEndpoint+ "/cards")
-
-    
   }
 
   deleteOneCardService(id: number) {

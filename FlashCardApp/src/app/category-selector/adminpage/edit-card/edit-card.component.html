@@ -1,35 +1,45 @@
 <div class="main-login">
-    <span class="login-title">Kártya Szerkesztése: </span>
-    <form class="login-form" [formGroup]="createCardForm">
-     <mat-form-field class="input-full-width">
-         <mat-label>Magyar</mat-label>
-         <input 
-         type="text" 
-         matInput 
-         formControlName ="magyar" 
-         placeholder="Kiscica">
-       </mat-form-field>
-       <br> 
-       <mat-form-field class="input-full-width">
-        <mat-label>Német</mat-label>
+
+  <span class="login-title">Kártya Szerkesztése: </span>
+
+  <form class="login-form" [formGroup]="editCardForm">
+
+    <mat-form-field class="input-full-width">
+        <mat-label>Magyar</mat-label>
         <input 
         type="text" 
         matInput 
-        formControlName ="nemet" 
-        placeholder="panzerkampfwagen">
+        formControlName ="magyar" 
+        placeholder="Kiscica">
+        <mat-error *ngIf="editCardForm.get('magyar')?.touched && editCardForm.get('magyar')?.hasError('required')">Ez a mező <strong>kötelező</strong></mat-error>
       </mat-form-field>
+
       <br> 
+
       <mat-form-field class="input-full-width">
-        <mat-label>Kategória</mat-label>
-        <mat-select formControlName="category">
-          <mat-option *ngFor="let category of categories2; trackBy: trackByCategory" [value]="category.value">
-            {{ category.viewValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <br> 
-       <br>
-       <button mat-raised-button (click)="securityCheckPUT()">Szerkeszt</button>
-       <button mat-raised-button (click)="toggleOff()">Mégse</button>
+      <mat-label>Német</mat-label>
+      <input 
+      type="text" 
+      matInput 
+      formControlName ="nemet" 
+      placeholder="panzerkampfwagen">
+      <mat-error *ngIf="editCardForm.get('nemet')?.touched && editCardForm.get('nemet')?.hasError('required')">Ez a mező <strong>kötelező</strong></mat-error>
+    </mat-form-field>
+
+    <br> 
+
+    <mat-form-field class="input-full-width">
+      <mat-label>Kategória</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories2; trackBy: trackByCategory" [value]="category.value">
+          {{ category.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="editCardForm.get('category')?.touched && editCardForm.get('category')?.hasError('required')">Ez a mező <strong>kötelező</strong></mat-error>
+    </mat-form-field>
+
+    <br> 
+    <button mat-raised-button (click)="securityCheckPUT()">Szerkeszt</button>
+    <button mat-raised-button (click)="toggleOff()">Mégse</button>
  </form>
- </div>
+</div>

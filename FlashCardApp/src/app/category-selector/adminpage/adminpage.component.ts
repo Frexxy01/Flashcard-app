@@ -1,4 +1,4 @@
-import { Component, OnDestroy, signal } from '@angular/core';
+import { Component, ElementRef, OnDestroy, signal, ViewChild } from '@angular/core';
 import { learningCard } from './admin';
 import {MatTableModule} from '@angular/material/table'
 import { MatButtonModule } from '@angular/material/button';
@@ -21,73 +21,72 @@ export class AdminpageComponent implements OnDestroy{
 
   hide = signal(false)
   hideEdit = signal(false)
-
   selectedCard: any = null;
+  tableData: learningCard[] = []
+  displayedColumns: string[] = ['id', 'magyar', 'nemet', 'category', 'operation', 'edit']
+
+  private subscriptions: Subscription[] = []
+  private $getAllCards: Observable<learningCard[]>;
+
+  constructor(
+    private cardService: StudcardApiService, 
+    private router: Router,
+   ) {
+    this.$getAllCards = this.cardService.$getCards
+    this.loadCards()
+  }
+
+  private loadCards(): void {
+    const sub = this.cardService.$getCards.subscribe(cards => {
+      this.tableData = cards;
+    });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
   toggleAdd() {
     this.hide.set(!this.hide());
   }
+  
   toggleEdit(element: learningCard) {
     this.selectedCard = element
     this.hideEdit.set(!this.hideEdit())
   }
 
-  $getAllCards: Observable<learningCard[]>;
-
-  tableData: learningCard[] = []
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'operation', 'edit']
-
-  subscription !: Subscription
-
-  constructor(private cardSevice: StudcardApiService, private router: Router) {
-    this.$getAllCards = this.cardSevice.$getCards.pipe(
-      //map((cards)=> this.tableData)
-    )
-    this.subscription = this.$getAllCards.subscribe((cards: learningCard[]) => {
-      this.tableData = cards
-      console.log(this.tableData)
-    })
-
-  }
-
-  deleteOneCardComponent(id: number) {
-    this.subscription = this.cardSevice.deleteOneCardService(id).subscribe((updatedCards: learningCard[]) => {
-      this.tableData = updatedCards
-      console.log(this.tableData)
-    })
-  }
-  
-  createNewCardComponent(learningCard: learningCard) {
-
-    this.subscription = this.cardSevice.createNewCardService(learningCard).subscribe((updatedCards: learningCard[]) => {
-      this.tableData = updatedCards
-      console.log(this.tableData)
-    })
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-  handleCardsUpdated(): void {
-    // After receiving the updated cards, make a GET request to refresh the list
-    console.log('Logging from parent!')
-    this.subscription = this.$getAllCards.subscribe((cards: learningCard[]) => {
-      this.tableData = cards
-      console.log(this.tableData)
-    })
-    this.hideEdit = signal(false)
-  }
   toggleEditOff() {
     this.hideEdit = signal(false)
   }
+  
   redirectTo(url:string) {
     return this.router.navigate([url])
   }
 
+  deleteOneCardComponent(id: number) {
+    const sub = this.cardService.deleteOneCardService(id).subscribe(updatedCards => {
+      this.tableData = updatedCards;
+    });
+    this.subscriptions.push(sub);
   }
+  
+  createNewCardComponent(learningCard: learningCard) {
+    const sub = this.cardService.createNewCardService(learningCard).subscribe(updatedCards => {
+      this.tableData = updatedCards;
+    });
+    this.subscriptions.push(sub);
+  }
+
+  handleCardsUpdated(): void {
+    // After receiving the updated cards, make a GET request to refresh the list
+    const sub = this.$getAllCards.subscribe((cards: learningCard[]) => {
+      this.tableData = cards
+    })
+    this.hideEdit = signal(false)
+    this.subscriptions.push(sub);
+  }
+}
 
   
 

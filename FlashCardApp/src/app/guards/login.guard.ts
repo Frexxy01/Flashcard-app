@@ -1,40 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { ActivatedRouteSnapshot, CanActivate, CanMatch, GuardResult, MaybeAsync, Route, Router, RouterStateSnapshot, UrlSegment } from '@angular/router';
-import { from, Observable, of } from 'rxjs';
+import { CanMatch, Router } from '@angular/router';
+import { catchError, from, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanMatch {
 
-  constructor(private auth: Auth, private router: Router) {
-
-  }
-
-  userLoggedIn = false
+  constructor(private auth: Auth, private router: Router) {}
 
   canMatch(): Observable<boolean> {
-
-    if(this.userLoggedIn){
-      return from(
-        new Promise<boolean>((resolve)=>{
-          resolve(true)
-        })
-      )
-    }
-      
-    // Wrap the onAuthStateChange in an observable
-    return from(
-      new Promise<boolean>((resolve) => {
-        this.auth.onAuthStateChanged((user) => {
-          if (user) {
-            resolve(true)
-          } else {
-            this.router.navigate(['/login'])
-            resolve(false)
-          }
-        })
+    return new Observable<boolean>((observer) => {
+      this.auth.onAuthStateChanged((user) => {
+        if (user) {
+          observer.next(true);
+        } else {
+          this.router.navigate(['/login']);
+          observer.next(false);
+        }
+      });
+    }).pipe(
+      catchError((error) => {
+        console.error('Error checking auth state:', error);
+        this.router.navigate(['/login']);
+        return [false];
       })
     )
   }

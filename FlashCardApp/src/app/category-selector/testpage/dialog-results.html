@@ -1,4 +1,5 @@
 <h2 mat-dialog-title>Gratulálok!</h2>
+
 <mat-dialog-content>
   <div *ngIf="data.length > 0">
     <p>Ezeket a szavakat kell még gyakorolnod:</p>
@@ -9,8 +10,8 @@
   <div *ngIf="data.length == 0">
     <p>Az összes szót helyesen tudtad! Egyszerűen hihetetlen!</p>
   </div>
-
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button mat-dialog-close cdkFocusInitial (click)="redirectTo('categories')">Vissza a főoldalra</button>
 </mat-dialog-actions>

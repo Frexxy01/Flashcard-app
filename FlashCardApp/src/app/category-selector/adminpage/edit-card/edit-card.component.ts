@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StudcardApiService } from '../../services/studcard-api.service';
@@ -17,63 +17,55 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './edit-card.component.html',
   styleUrl: './edit-card.component.scss'
 })
-export class EditCardComponent {
+export class EditCardComponent implements OnInit, OnDestroy {
   
   @Input() card !: learningCard;
-
   @Output() cardsUpdated = new EventEmitter<learningCard[]>()
-
   @Output() toggleEditCard = new EventEmitter()
+  editCardForm !: FormGroup
+  categories2 = [
+    {value: 'ruhazat', viewValue: 'Ruházat'},
+    {value: 'etel', viewValue: 'Étel'},
+    {value: 'haztartas', viewValue: 'Háztartás'}
+  ]
+
+  private subscription !: Subscription;
+
+ 
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private cardService: StudcardApiService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    this.editCardForm = this.fb.group({
+      id: [this.card.id],
+      magyar : [this.card.magyar, [Validators.required]],
+      nemet : [this.card.nemet, [Validators.required]],
+      category: [this.card.category, [Validators.required]]
+    })
   }
 
-  createCardForm !: FormGroup
-
-  categories2 = [
-    {
-      value: 'ruhazat', viewValue: 'Ruházat'
-    },
-    {
-      value: 'etel', viewValue: 'Étel'
-    },
-    {
-      value: 'haztartas', viewValue: 'Háztartás'
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe()
     }
-  ]
-
-  subscription !: Subscription;
+  }
 
   trackByCategory(index: number, category: any): string {
     return category.value; // Using 'value' as the unique identifier
   }
 
-
-  ngOnInit(): void {
-    this.createCardForm = this.fb.group({
-      id: [this.card.id],
-      magyar : [this.card.magyar],
-      nemet : [this.card.nemet],
-      category: [this.card.category]
-    })
-  }
-
   securityCheckPUT() {
-    const checks = Object.values(this.createCardForm.value)
+    const checks = Object.values(this.editCardForm.value)
     for (let i = 0; i < checks.length; i++) {
       if (checks[i] == '') {
         alert('Minden menő megadása kötelező')
         break
       }
     }
-    
-    console.log(this.createCardForm.value)
-    this.editCard(this.card.id, this.createCardForm.value).subscribe((updatedCards: learningCard[]) => {
-      console.log(updatedCards)
+    this.editCard(this.card.id, this.editCardForm.value).subscribe((updatedCards: learningCard[]) => {
       this.cardsUpdated.emit(updatedCards)
     })
    }

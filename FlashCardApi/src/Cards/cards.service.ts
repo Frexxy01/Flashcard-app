@@ -1,14 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateRoomDto } from './dto/create-room.dto';
-
-import { Room } from './entities/room.entity';
 import { v4 } from 'uuid';
 import { studyCard } from 'src/cards';
 import { studyCardsFALLBACK } from 'src/data/studyCardData';
 
 
 @Injectable()
-export class RoomsService {
+export class CardsService {
   studyCards: studyCard[] = studyCardsFALLBACK
   create(CreateStudyCardDto: studyCard) {
     CreateStudyCardDto.id = v4();

@@ -1,51 +1,55 @@
+<div class="admin-users">
+  <p>Az admin funckiók eléréséhez:</p>
+  <p>Email: admin&#64;gmail.com</p>
+  <p>Jelszó: (ireallyneedajob)</p>
+</div>
+
 <div class="main-login">
     
    <span class="login-title">Bejelentkezés</span>
 
    <form class="login-form" [formGroup]="loginForm">
+
     <mat-form-field class="input-full-width">
-        <mat-label>Email cím</mat-label>
-        <input 
-        type="email" 
-        matInput 
-        formControlName ="email" 
-        placeholder="felhasznalo012">
-        <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')">Írj be egy érvényes email címet</mat-error>
-        <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')">Email megadása <strong>kötelező</strong></mat-error>
+      <mat-label>Email cím</mat-label>
+      <input 
+      type="email" 
+      matInput 
+      formControlName ="email" 
+      placeholder="felhasznalo012">
+      <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')">Írj be egy érvényes email címet</mat-error>
+      <mat-error *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')">Email megadása <strong>kötelező</strong></mat-error>
+    </mat-form-field>
 
-      </mat-form-field>
-      <br> 
-      <mat-form-field class="input-full-width">
-        <mat-label>Jelszó</mat-label>
-        <input 
-        formControlName ="password" 
-        matInput [type]="hide() ? 'password' : 'text'" />
-        <button
-          mat-icon-button
-          matSuffix
-          
-          (click)="clickEvent($event)"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide()"
-        >
-          <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-      <button mat-flat-button (click)="loginWithEmail()">Bejelentkezés</button>
-      <br>
-      <button class="login-with-google-btn" (click)="loginWithGoogle()">Bejelentkezés Google-el</button>
-      <br>
-      <button class="fb connect" (click)="loginWithGoogle()">Bejelentkezés Facebookal</button>
-      <br>
+    <br> 
 
-      <div class="redirect-to-register">
-        <span>Nincs még fiókod?
-             <span (click)="navigateTo('register')" class="register-link">Regisztrálj</span>
-             most!
-        </span>
-      </div>
+    <mat-form-field class="input-full-width">
+      <mat-label>Jelszó</mat-label>
+      <input 
+      formControlName ="password" 
+      matInput [type]="hide() ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
 
+    <button mat-flat-button (click)="loginWithEmail()">Bejelentkezés</button>
+    <br>
+    <button class="login-with-google-btn" (click)="loginWithGoogle()">Bejelentkezés Google-lel</button>
+    <br>
 
-</form>
-   
+    <div class="redirect-to-register">
+      <span>Nincs még fiókod?
+            <span (click)="redirectTo('register')" class="register-link">Regisztrálj</span>
+            most!
+      </span>
+    </div>
+    
+  </form>
 </div>

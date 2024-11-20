@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { RedirectService } from '../utils/redirect.service';
 
 @Component({
   selector: 'app-notfound',
@@ -11,13 +12,9 @@ import { Router } from '@angular/router';
 })
 export class NotfoundComponent {
 
-  constructor(
-    private router: Router
-  ) {
-
-  }
+  constructor(private redirectService: RedirectService ) {}
 
   backToHome() {
-    this.router.navigate(['homepage'])
+    this.redirectService.redirectTo('homepage')
   }
 }

@@ -1,4 +1,6 @@
 export const environment = {
+    adminUUID: '3SCqFmzqizPogF9PHruTIvdpNa12',
+    isAdmin: false,
     production: false,
     apiEndPoint: 'http://localhost:3000',
     firebaseConfig: {

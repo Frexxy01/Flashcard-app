@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { RedirectService } from '../utils/redirect.service';
 
 
 @Component({
@@ -24,23 +25,19 @@ export class UserpageComponent {
   color: string = 'ligthgray';
 
   constructor(private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private redirectService: RedirectService
   ) {
 
   }
 
-  navigateTo(url: string) {
-    return this.router.navigate([url])
+  redirectTo(url: string) {
+    this.redirectService.redirectTo(url)
   }
 
   backToLogin() {
     this.authService.signOut()
-    this.navigateTo('login')
+    this.redirectTo('login')
   }
-  redirectToCategory() {
-    this.router.navigate(['categories'])
-  }
-  redirectToAdminpage() {
-    this.router.navigate(['admin'])
-  }
+ 
 }

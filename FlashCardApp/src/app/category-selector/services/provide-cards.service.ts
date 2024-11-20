@@ -10,7 +10,6 @@ import { learningCard } from '../adminpage/admin';
 export class ProvideCardsService {
 
   constructor(private router: Router){
-  
   }
 
   generateRandomTestcards(max: number, limit: number, array: learningCard[]): learningCard[] {
@@ -25,15 +24,10 @@ export class ProvideCardsService {
       uniqueNumbers.add(randomNum)
     }
     const randomIndexes = Array.from(uniqueNumbers)
-
     let returnarray = []
-
     for (let number of randomIndexes) {
       returnarray.push(array[number])
     }
     return returnarray
   }
-  
-
-
 }

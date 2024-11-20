@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, User, UserCredential } from '@angular/fire/auth';
+import { environment } from '../../environment/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
-
+  constructor (private auth: Auth) { }
+  
   //Google Login
   signInwithGoogle() {
     const provider = new GoogleAuthProvider()
@@ -29,12 +31,14 @@ export class AuthService {
     }
 
   async signInWithEmail(email:string, password: string) {
+
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password)
       return userCredential
     } catch (err) {
+      alert('Nem megfelelő felhasználónév/jelszó.')
       console.error("Error signing up:", err)
       return null
     }  
    } 
-  }
+}

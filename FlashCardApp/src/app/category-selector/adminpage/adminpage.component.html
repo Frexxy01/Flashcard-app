@@ -1,4 +1,5 @@
 <div class="main-admin-div">
+
     <h1>Üdvözöllek az adminisztrátori felületen!</h1>
     <div>
       <button class="toggle-create-div"
@@ -9,28 +10,27 @@
     
     <div class="crud-operation-holder">
       <app-create-card *ngIf="hide()" (cardsUpdated)="handleCardsUpdated()"></app-create-card>
-      <app-edit-card id="update" [card]="selectedCard" (toggleEditCard)="toggleEditOff()" (cardsUpdated)="handleCardsUpdated()" *ngIf="hideEdit()"></app-edit-card>
+      <app-edit-card  [card]="selectedCard" (toggleEditCard)="toggleEditOff()" (cardsUpdated)="handleCardsUpdated()" *ngIf="hideEdit()"></app-edit-card>
     </div>
     <div class="admin-content-div">
         <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
 
-            <ng-container matColumnDef="position">
+            <ng-container matColumnDef="id">
               <th mat-header-cell *matHeaderCellDef> id </th>
               <td mat-cell *matCellDef="let element"> {{element.id}} </td>
             </ng-container>
           
-            <ng-container matColumnDef="name">
+            <ng-container matColumnDef="magyar">
               <th mat-header-cell *matHeaderCellDef> Magyar </th>
               <td mat-cell *matCellDef="let element"> {{element.magyar}} </td>
             </ng-container>
         
-            <ng-container matColumnDef="weight">
+            <ng-container matColumnDef="nemet">
               <th mat-header-cell *matHeaderCellDef> Német </th>
               <td mat-cell *matCellDef="let element"> {{element.nemet}} </td>
             </ng-container>
           
-      
-            <ng-container matColumnDef="symbol">
+            <ng-container matColumnDef="category">
               <th mat-header-cell *matHeaderCellDef> Kategória </th>
               <td mat-cell *matCellDef="let element"> {{element.category}} </td>
             </ng-container>
@@ -48,10 +48,9 @@
                   <button (click)="toggleEdit(element)" class="button-edit">Szerkeszt</button>
               </td>
           </ng-container>
-
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+          
     </div>   
 </div>

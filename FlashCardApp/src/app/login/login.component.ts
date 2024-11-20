@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from "@angular/material/input"
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { RedirectService } from '../utils/redirect.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,14 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  loginForm !: FormGroup
+  hide = signal(true);
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
-  ) {
-  }
-  loginForm !: FormGroup
+    private authService: AuthService,
+    private redirectService: RedirectService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,19 +32,20 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     })
   }
-  hide = signal(true);
+ 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
   }
-  navigateTo(url: string) {
-    return this.router.navigate([url])
+  
+  redirectTo(url: string) {
+    this.redirectService.redirectTo(url)
   }
 
   // Google Login
   loginWithGoogle() {
     this.authService.signInwithGoogle()
-    .then((result) =>  this.navigateTo('homepage'))
+    .then((result) =>  this.redirectService.redirectTo('homepage'))
     .catch((err) => console.error('Error signing in', err))
   }
 
@@ -61,7 +64,7 @@ export class LoginComponent implements OnInit {
     }
     const credentials = await this.authService.signInWithEmail(email,password)
     if (credentials) {
-      this.navigateTo('homepage');
+      this.redirectService.redirectTo('homepage');
     } else {
       this.loginForm.reset()
       return;
