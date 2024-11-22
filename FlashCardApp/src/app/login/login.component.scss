@@ -100,9 +100,14 @@
     padding: 2 25px 0 0;
     content: "f";
 }
+@media (max-width: 1400px) {
+    .admin-users {
+        display: none;
+    }
+}
 
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
     .main-login {
         width: 80%;
     }
